@@ -14,7 +14,7 @@ Cada integrante graba **únicamente su propio clip**, con el texto palabra por p
 
 | Clip | Integrante | Contenido | Duración objetivo | Enlace al video | Estado |
 |---|---|---|---|---|---|
-| 1 | José Andrés Picado Corrales | Apertura (slides Gamma) + demo fricción y modo 2D | ~3–3.5 min | *(pendiente)* | ⏳ Pendiente |
+| 1 | José Andrés Picado Corrales | Apertura (6 diapositivas de `Physics-Playground.pptx`) + demo fricción y modo 2D | ~4–4.5 min | *(pendiente)* | ⏳ Pendiente |
 | 2 | Matías Lutz | Marco teórico en detalle | ~3 min | *(pendiente)* | ⏳ Pendiente |
 | 3 | Antonio Mora Blotta | Arquitectura técnica + demo F=m·a | ~2.5 min | *(pendiente)* | ⏳ Pendiente |
 | 4 | Juan Pablo Solano Esquivel | Análisis, limitaciones y conclusiones | ~4.5–5 min | *(pendiente)* | ⏳ Pendiente |
@@ -25,6 +25,6 @@ Cada integrante graba **únicamente su propio clip**, con el texto palabra por p
 
 - **Formato:** MP4 (H.264), horizontal (landscape), mínimo 1080p si es posible.
 - **Audio:** claro, sin ruido de fondo — probar el micrófono antes de grabar la toma final.
-- **Para los clips con demo en vivo (1 — José Andrés, 3 — Antonio):** grabar la pantalla completa mientras `physics_playground.py` corre (usar el grabador de pantalla de Windows: `Win + Alt + R`, o Xbox Game Bar), con la voz explicando en simultáneo. Dejar el simulador ya en el estado inicial correcto (ver "Preparar antes de grabar" de cada clip en el guión) antes de darle a grabar. El clip 1 además incluye las diapositivas de apertura (ver [`../gamma_prompt_apertura.md`](../gamma_prompt_apertura.md)) grabadas justo antes de pasar al simulador, sin cortar.
+- **Para los clips con demo en vivo (1 — José Andrés, 3 — Antonio):** grabar la pantalla completa mientras `physics_playground.py` corre (usar el grabador de pantalla de Windows: `Win + Alt + R`, o Xbox Game Bar), con la voz explicando en simultáneo. Dejar el simulador ya en el estado inicial correcto (ver "Preparar antes de grabar" de cada clip en el guión) antes de darle a grabar. El clip 1 además incluye el recorrido de las 6 diapositivas de `Physics-Playground.pptx`, grabado justo antes de pasar al simulador, sin cortar.
 - **Para los clips de explicación (2 — Matías, 4 — Juan Pablo):** puede ser cámara/webcam hablando a la cámara, o una grabación de pantalla mostrando el informe/gráfico mientras se explica.
 - **Nombrar el archivo localmente** antes de subirlo a Drive, ej.: `avance-final-fisica1_clip1_jose-andres.mp4` (facilita encontrarlo después).

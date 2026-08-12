@@ -21,24 +21,42 @@
 
 ---
 
-## Clip 1 — José Andrés Picado Corrales (≈ 3–3.5 min)
-### Apertura del proyecto (diapositivas) + demo en vivo: fricción y modo 2D
+## Clip 1 — José Andrés Picado Corrales (≈ 4–4.5 min)
+### Apertura del proyecto (diapositiva por diapositiva) + demo en vivo: fricción y modo 2D
 
-Este clip abre el video. Tiene dos partes: unas diapositivas rápidas de resumen (generadas con Gamma, ver [`gamma_prompt_apertura.md`](./gamma_prompt_apertura.md)) y, sin cortar, tu demo en vivo del simulador.
+Este clip abre el video. Tiene dos partes: el recorrido completo de `Physics-Playground.pptx` (6 diapositivas, una por una) y, sin cortar, tu demo en vivo del simulador.
 
-### Parte A — Diapositivas (≈ 60–90 seg)
+### Parte A — Diapositivas (≈ 2–2.5 min, 6 diapositivas)
 
-**Qué mostrar en pantalla:** las diapositivas generadas en Gamma (modo "Present" o exportadas), en pantalla completa.
+**Qué mostrar en pantalla:** `Physics-Playground.pptx` en modo presentación, pantalla completa. Avanzás de diapositiva justo donde dice "**[Avanzar a diapositiva N]**" — dejá que la nueva diapositiva se vea un segundo en silencio antes de retomar el texto, para que no se sienta apurado.
 
-> Hola, buenas tardes. Mi nombre es José Andrés Picado Corrales, y junto con mis compañeros Matías Lutz, Antonio Mora Blotta y Juan Pablo Solano Esquivel, desarrollamos para el curso de Física I un simulador interactivo de las Leyes de Newton.
->
-> [**Aquí narras siguiendo tus diapositivas de Gamma:** el problema que resolvimos, qué construimos —un simulador con dos modos, uno de rebote y uno de Fuerza Newton—, cómo está hecho por encima, y los roles de cada integrante. Mantenlo breve, esto es solo el resumen antes de entrar en detalle.]
->
-> Ya con esa idea general, vamos a ver el simulador funcionando en vivo.
+**Diapositiva 1 — Portada**
+
+> Hola, buenas tardes. Mi nombre es José Andrés Picado Corrales, y junto con mis compañeros Matías Lutz, Antonio Mora Blotta y Juan Pablo Solano Esquivel, desarrollamos para el curso de Física I este proyecto: un simulador de las Leyes de Newton llamado Physics Playground, bajo la guía del profesor Kevin Eduardo Cervantes Melgar.
+
+**[Avanzar a diapositiva 2 — Motivación]**
+
+> Empecemos por la motivación. Aprender las Leyes de Newton normalmente se queda en ecuaciones escritas en la pizarra, sin la posibilidad de experimentar con ellas de verdad. Entonces nos hicimos una pregunta: ¿qué pasaría si pudiéramos cambiar la masa, la fuerza y la fricción de un objeto, y ver el resultado inmediatamente, en tiempo real? De esa pregunta nació este proyecto.
+
+**[Avanzar a diapositiva 3 — Qué construimos]**
+
+> Así que construimos un simulador con dos modos. El primero es el modo Rebote: caída libre y colisiones, con gravedad configurable, y visualización de trayectorias y velocidades en tiempo real. El segundo es el modo Fuerza Newton, que es el corazón de este proyecto: una simulación interactiva de F igual a m por a, con diagrama de cuerpo libre, fricción cinética ajustable, y comparación directa contra los modelos ideales de MRU y MRUA.
+
+**[Avanzar a diapositiva 4 — Arquitectura técnica]**
+
+> Por dentro, el simulador está construido en tres capas. Los controles son deslizadores y botones para ajustar masa, fuerza y fricción. El render y la entrada usan Python con Pygame, para los gráficos y la interacción. Y en el núcleo está la física: integración de Euler para calcular posición y velocidad. En términos simples, la integración de Euler calcula el movimiento paso a paso — la posición y la velocidad se actualizan en cada cuadro según las fuerzas netas aplicadas — y los controles interactivos permiten modificar esos parámetros en vivo, sin necesidad de reiniciar la simulación.
+
+**[Avanzar a diapositiva 5 — El equipo]**
+
+> Y aquí está el equipo y los roles de cada quien. Matías Lutz se encargó del planteamiento del proyecto y el marco teórico de las Leyes de Newton. Antonio Mora Blotta fue el desarrollo principal del simulador en Python con Pygame. Yo trabajé en las pruebas, la implementación de la fricción y el diagrama de cuerpo libre. Y Juan Pablo Solano Esquivel hizo el análisis de resultados, la validación y la redacción de las conclusiones.
+
+**[Avanzar a diapositiva 6 — Vamos a verlo en acción]**
+
+> Y con eso, vamos a verlo en acción: a continuación, la demostración en vivo del simulador Physics Playground.
 
 ### Parte B — Demo en vivo: fricción cinética y modo 2D (≈ 2 min)
 
-**Qué mostrar en pantalla:** grabación de pantalla completa (`Win + Alt + R`), sin cortar desde las diapositivas. Preparar antes: modo 1D, fricción activada, μk = 0.25, Fa = 15 N.
+**Qué mostrar en pantalla:** salís del modo presentación y, sin cortar la grabación, cambiás a la ventana del simulador ya abierto (grabación de pantalla completa con `Win + Alt + R`). Preparar antes: modo 1D, fricción activada, μk = 0.25, Fa = 15 N.
 
 > Mi parte en el desarrollo fue apoyar la implementación, sobre todo las pruebas, la fricción y el diagrama de cuerpo libre. Les muestro eso ahora.
 >
@@ -50,7 +68,7 @@ Este clip abre el video. Tiene dos partes: unas diapositivas rápidas de resumen
 >
 > Con esta vista general del simulador funcionando, le paso la palabra a Matías, que les va a explicar con más detalle la teoría detrás de todo esto.
 
-**Duración estimada, sin contar diapositivas ni pausas de demo:** ~1 min 45 seg de narración + tiempo de slides y demo.
+**Duración estimada:** ~1 min 40 seg de narración de las 6 diapositivas + ~1 min 45 seg de narración de la demo, más el tiempo real de los clics y las transiciones entre diapositivas (total del clip: ~4–4.5 min).
 
 ---
 
@@ -142,20 +160,20 @@ Aunque los clips se graban por separado, todos deben poder responder preguntas e
 
 | Clip | Integrante | Contenido | Tiempo aprox. |
 |---|---|---|---|
-| 1 | José Andrés Picado Corrales | Apertura (slides) + demo fricción y modo 2D | ~3–3.5 min |
+| 1 | José Andrés Picado Corrales | Apertura (6 diapositivas, una por una) + demo fricción y modo 2D | ~4–4.5 min |
 | 2 | Matías Lutz | Marco teórico en detalle | ~3 min |
 | 3 | Antonio Mora Blotta | Arquitectura + demo F=m·a | ~2.5 min |
 | 4 | Juan Pablo Solano Esquivel | Análisis, limitaciones y conclusiones | ~4.5–5 min |
-| **Total (video editado)** | | | **~13–15 min** |
+| **Total (video editado)** | | | **~14–15 min** |
 
-*(Los tiempos de demo en vivo dentro de los clips 1 y 3 se suman aparte del tiempo de habla — al editar, dejar que la acción en pantalla respire un par de segundos antes de seguir hablando. Si el total se pasa de 15 min, lo primero que se puede recortar es la parte de diapositivas del Clip 1, ya que Matías cubre la teoría con más detalle después.)*
+*(Los tiempos de demo en vivo dentro de los clips 1 y 3 se suman aparte del tiempo de habla — al editar, dejar que la acción en pantalla respire un par de segundos antes de seguir hablando. Si el total se pasa de 15 min, lo primero que se puede acortar es el ritmo de las diapositivas del Clip 1 — leerlas un poco más rápido —, ya que Matías cubre la teoría con más detalle después.)*
 
 ---
 
 ## Cómo grabar y enviar tu clip
 
 1. Repasa tu texto (arriba) en voz alta un par de veces antes de la toma final.
-2. Si tu parte incluye demo en vivo (clips 1 y 3): graba la pantalla completa con `Win + Alt + R` (Xbox Game Bar, viene incluido en Windows) mientras hablás y usás el simulador. Ten el simulador ya abierto y en el estado inicial correcto (ver la sección "Preparar antes de grabar" de tu clip) antes de darle a grabar.
+2. Si tu parte incluye demo en vivo (clips 1 y 3): graba la pantalla completa con `Win + Alt + R` (Xbox Game Bar, viene incluido en Windows) mientras hablás y usás el simulador. Ten el simulador ya abierto y en el estado inicial correcto (ver la sección "Preparar antes de grabar" de tu clip) antes de darle a grabar. José Andrés, además, ten `Physics-Playground.pptx` ya abierto en modo presentación antes de empezar a grabar, para pasar directo de la diapositiva 6 al simulador sin cortar.
 3. Si tu parte es solo explicación (clips 2 y 4): puede ser cámara/webcam hablando directo, o pantalla mostrando el informe/gráfico mientras explicás.
 4. Sube tu archivo a Google Drive y compártelo como "Cualquier persona con el enlace — Lector".
 5. Agrega tu enlace en [`videos/VIDEOS.md`](./videos/VIDEOS.md) dentro del repositorio del proyecto — instrucciones detalladas ahí, incluyendo cómo hacerlo desde el navegador sin instalar nada.

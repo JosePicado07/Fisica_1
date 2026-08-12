@@ -17,7 +17,8 @@ Proyecto de curso: simulador interactivo de las Leyes de Newton (fuerza, masa, a
 | `videos/VIDEOS.md` | Enlaces a los videos de respaldo grabados por cada integrante (ver instrucciones ahí). |
 | `requirements.txt` | Dependencias de Python (`pygame`). |
 | `run.bat` | Doble clic para instalar dependencias y correr el simulador en Windows. |
-| `gamma_prompt_apertura.md` | Prompt listo para pegar en Gamma y generar las diapositivas de apertura (clip de José Andrés). |
+| `Physics-Playground.pptx` | Diapositivas de apertura (6), narradas diapositiva por diapositiva en el Clip 1 del guión. |
+| `gamma_prompt_apertura.md` | Prompt usado para generar el borrador de `Physics-Playground.pptx` con Gamma (referencia histórica). |
 
 ## Cómo correr el simulador
 
