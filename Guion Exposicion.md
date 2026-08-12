@@ -2,134 +2,118 @@
 ## Simulador de Leyes de Newton (Physics Playground)
 
 **Fecha de exposición:** Jueves 13 de agosto de 2026
-**Duración objetivo:** 10–15 minutos (repartidos entre los 4 integrantes)
+**Duración objetivo:** 10–15 minutos
 **Integrantes:** Matías Lutz · Antonio Mora Blotta · José Andrés Picado Corrales · Juan Pablo Solano Esquivel
 
-> Este guión es una guía de contenido y tiempos, **no un texto para leer palabra por palabra**. Cada integrante debe apropiarse de su parte y explicarla con sus propias palabras. Antes de la exposición: **ensayar completo al menos 2 veces** con cronómetro, y dejar el simulador abierto y probado de antemano (no confiar en que arrancará bien la primera vez en vivo).
+> **Cada integrante graba su propio clip por separado** (no es una presentación en vivo conjunta), así que este documento trae el **texto palabra por palabra** que cada quien debe decir en su video. Cada clip es independiente: empieza con tu propio saludo/presentación y cierra señalando a quién sigue, para que al unir los 4 videos en orden se sienta como una sola exposición continua.
+>
+> Igual pueden ajustar alguna palabra si no les sale natural al hablarlo — lo importante es no cambiar los datos ni los números (están verificados). Practiquen leyéndolo en voz alta 2–3 veces antes de grabar la toma final.
 
-**Preparación técnica previa (antes de entrar al salón):**
-- Tener `physics_playground.py` corriendo y probado en la laptop que se usará.
-- Tener el modo Newton ya seleccionado (pestaña "FUERZA NEWTON") para no perder tiempo buscándolo en vivo.
-- Tener valores de ejemplo ya decididos de antemano (ver sugerencias en cada sección).
-- Tener el informe final (PDF) y este simulador accesibles sin depender de internet.
+**Preparación técnica previa (antes de grabar):**
+- Tener `physics_playground.py` corriendo y probado en la laptop que se va a usar para grabar.
+- Tener el modo Newton ya seleccionado (pestaña "FUERZA NEWTON") para no perder tiempo buscándolo en cámara.
+- Ensayar la secuencia de clics de tu demo (si tu parte la tiene) antes de grabar la toma final, para no dudar en video.
+- Grabar en un lugar silencioso, con buena luz si es cámara, y probar el audio antes de la toma final.
 
-**Respaldo en video:** además de la exposición en vivo, el equipo prepara un video de respaldo — cada integrante graba únicamente su propia sección (ver sección 7 de este documento). Sirve como respaldo ante fallos técnicos el día de la exposición y, opcionalmente, como demostración adicional si el profesor lo permite.
+**Especificaciones y proceso de envío del video:** ver [`videos/VIDEOS.md`](./videos/VIDEOS.md) en el repositorio — ahí se sube el enlace de cada clip (no el archivo, pesa demasiado) y se explica cómo editarlo desde el navegador sin instalar nada.
 
----
-
-## 0. Apertura (≈ 1 min) — Todo el equipo
-
-**Quién habla:** los 4, uno a la vez, muy breve.
-
-Cada integrante dice su nombre y su rol en el proyecto:
-
-- **Matías Lutz** — "Investigación y documentación: planteamiento del proyecto y marco teórico."
-- **Antonio Mora Blotta** — "Desarrollador principal del simulador."
-- **José Andrés Picado Corrales** — "Soporte de desarrollo: pruebas, fricción y diagrama de cuerpo libre."
-- **Juan Pablo Solano Esquivel** — "Investigación y documentación: análisis de resultados y conclusiones."
-
-Uno de los cuatro (sugerido: Matías, ya que abre la siguiente sección) dice una frase de transición:
-> "Hoy les mostramos un simulador interactivo de las Leyes de Newton, que desarrollamos y verificamos durante las últimas semanas. Vamos a explicar el fenómeno físico, mostrar la simulación funcionando en vivo, y cerrar con el análisis de los resultados."
+**Orden final de los clips al editar:** Matías → Antonio → José Andrés → Juan Pablo.
 
 ---
 
-## 1. Planteamiento y diseño — Avance 1 (≈ 2.5–3 min) — Matías Lutz
+## Clip 1 — Matías Lutz (≈ 3 min)
+### Planteamiento, fenómeno físico y marco teórico
 
-**Qué mostrar en pantalla:** portada/diapositiva simple o el documento del Avance 1 (opcional), no es obligatorio usar diapositivas.
+**Qué mostrar en pantalla:** tu cara (cámara), o el documento del Avance 1 / el informe si preferís mostrar texto mientras hablás. No es obligatorio usar diapositivas.
 
-**Contenido a cubrir:**
-1. **Fenómeno físico elegido:** Dinámica — Leyes de Newton (fuerza, masa, aceleración, equilibrio, movimiento).
-2. **Motivación/justificación:** permitir experimentar con las leyes de Newton sin laboratorio físico, reforzando F=m·a, diagramas de cuerpo libre y fuerza neta de forma visual e interactiva.
-3. **Objetivo general:** diseñar e implementar un simulador que permita visualizar la relación entre fuerza neta, masa y aceleración.
-4. **Modelo matemático (mencionar las 3 ecuaciones clave, sin entrar en el detalle de código todavía):**
-   - Segunda ley de Newton: ∑F = m·a
-   - Fricción cinética: fk = μk·N
-   - Integración de Euler: v(t+Δt) = v(t) + a·Δt ; r(t+Δt) = r(t) + v·Δt
-5. Mencionar brevemente el diagrama de cuerpo libre como herramienta central de visualización (se mostrará en vivo más adelante).
+> Hola, buenas tardes. Mi nombre es Matías Lutz, y junto con mis compañeros Antonio Mora Blotta, José Andrés Picado Corrales y Juan Pablo Solano Esquivel, desarrollamos para el curso de Física I un simulador interactivo de las Leyes de Newton. Mi parte en el equipo fue la investigación y documentación: el planteamiento del proyecto y el marco teórico.
+>
+> El fenómeno físico que elegimos trabajar fue la dinámica de Newton: la relación entre fuerza, masa, aceleración, y cómo estos conceptos producen equilibrio o movimiento. Elegimos este tema porque nos permitía construir algo interactivo, donde uno pudiera realmente experimentar con las leyes de Newton sin necesidad de un laboratorio físico.
+>
+> La motivación detrás del proyecto es reforzar, de forma visual, tres ideas centrales: el diagrama de cuerpo libre, el concepto de fuerza neta, y la relación fuerza-masa-aceleración, es decir, F igual a m por a. Nuestro objetivo general fue diseñar e implementar un simulador que permitiera visualizar en tiempo real cómo cambia la aceleración de un objeto cuando se modifica la fuerza neta o la masa.
+>
+> Para lograrlo, el simulador se apoya en tres ecuaciones principales. La primera es la segunda ley de Newton: la sumatoria de fuerzas es igual a masa por aceleración. La segunda es la fórmula de la fricción cinética: fk es igual a mu-k, el coeficiente de fricción, multiplicado por la fuerza normal. Y la tercera es el método de integración numérica que usamos para calcular el movimiento paso a paso, llamado método de Euler: en cada instante, la velocidad nueva es la velocidad anterior más la aceleración por el paso de tiempo, y la posición nueva es la posición anterior más la velocidad por ese mismo paso de tiempo.
+>
+> Una herramienta central del simulador es el diagrama de cuerpo libre, que dibuja todas las fuerzas que actúan sobre el objeto como vectores, en tiempo real. Eso lo van a ver en un momento.
+>
+> Con ese marco teórico definido, le paso la palabra a Antonio, que les va a mostrar cómo se implementó todo esto y cómo funciona en la práctica.
 
-**Frase de cierre / transición a Antonio:**
-> "Con ese marco teórico definido, Antonio y José Andrés van a mostrarles cómo se implementó y cómo funciona en la práctica."
-
-**Tiempo:** apuntar a no pasar de 3 minutos — esta parte es contexto, el peso fuerte de la exposición está en la demo y el análisis.
-
----
-
-## 2. Implementación y demostración en vivo — Avance 2 (≈ 4–4.5 min) — Antonio Mora Blotta (principal) + José Andrés Picado Corrales (apoyo)
-
-Esta es la sección de mayor peso en la rúbrica (25 pts) — practicar la demo hasta que salga fluida.
-
-### 2.1. Arquitectura técnica (Antonio, ~1 min)
-
-**Qué decir:**
-- El simulador está hecho en Python con pygame.
-- Tiene dos modos seleccionables por pestañas: un modo de rebote (previo) y el modo "Fuerza Newton", que es el que responde a los objetivos del proyecto.
-- El modo Newton separa la física (clase `NewtonState`, sin nada de interfaz) de la parte visual — esto permitió probar la física de forma aislada, sin necesidad de abrir la ventana gráfica cada vez.
-- La física usa integración de Euler con el mismo Δt del framerate (~1/60 s), tal como se planteó en el Avance 1.
-
-### 2.2. Demo en vivo — parte 1: F = m·a (Antonio, ~1.5 min)
-
-**Qué hacer en pantalla:**
-1. Mostrar el simulador en modo 1D, sin fricción.
-2. Poner Fa = 10 N, masa = 2 kg. Iniciar. Señalar la lectura de aceleración en vivo (≈5.0 m/s²).
-3. Pausar, subir la masa a 5 kg (sin tocar la fuerza), reiniciar e iniciar de nuevo. Señalar que la aceleración baja a ≈2.0 m/s² — **la misma fuerza, más masa, menos aceleración**, a=Fneta/m en vivo.
-4. Señalar el diagrama de cuerpo libre: los vectores de Fa, peso (W), normal (N) y fricción (fk si está activa), y explicar que se escalan proporcionalmente a su magnitud.
-
-### 2.3. Demo en vivo — parte 2: fricción y modo 2D (José Andrés, ~1.5 min)
-
-**Qué hacer en pantalla:**
-1. Activar la fricción, poner μk en un valor visible (p. ej. 0.25) y dejar Fa constante. Señalar en el panel derecho el mensaje que indica si "Fa>fk: acelera" o "Fa=fk: equilibrio (MRU)".
-2. Quitar la fuerza aplicada (Fa=0) con el objeto en movimiento y mostrar cómo desacelera hasta detenerse limpiamente, sin rebotar de signo.
-3. Cambiar a modo 2D, aplicar la fuerza con un ángulo (p. ej. 45°), e iniciar — mostrar cómo el objeto traza una trayectoria diagonal y cómo el DCL rota junto con la fuerza aplicada.
-4. Mencionar brevemente las pruebas realizadas: se verificó F=m·a, MRU, MRUA, el frenado por fricción sin oscilaciones, y el comportamiento correcto al reiniciar y cambiar de modo.
-
-**Frase de cierre / transición:**
-> "Con la simulación funcionando y probada, Juan Pablo va a mostrarles qué dicen estos resultados desde el punto de vista físico."
+**Duración estimada leyendo a ritmo normal:** ~2 min 50 seg.
 
 ---
 
-## 3. Análisis de resultados y comparación teórica (≈ 2.5–3 min) — Juan Pablo Solano Esquivel
+## Clip 2 — Antonio Mora Blotta (≈ 2.5 min)
+### Arquitectura técnica + demo en vivo de F = m·a
 
-**Qué mostrar en pantalla:** el gráfico de posición vs. tiempo del simulador (curva simulada vs. curvas ideales MRU/MRUA), idealmente con el mismo caso Fa=10N, m=1kg, sin fricción usado en las pruebas.
+**Qué mostrar en pantalla:** grabación de pantalla completa (`Win + Alt + R`) con el simulador ya abierto en la pestaña "FUERZA NEWTON", modo 1D, sin fricción activada.
 
-**Contenido a cubrir:**
-1. **MRU:** cuando la fuerza neta es cero, el simulador reproduce una línea perfectamente recta en el gráfico de posición — velocidad constante, sin ningún error numérico (la integración de una constante es exacta).
-2. **MRUA:** con fuerza neta constante, tras 5 segundos con Fa=10N y m=1kg se obtuvo x≈124.5 m frente al valor analítico exacto de 125 m — una desviación de apenas 0.4%, explicada por el error de truncamiento propio del método de Euler, no por un error de modelado físico.
-3. **Hallazgo clave sobre la fricción:** el equipo esperaba, según el planteamiento del Avance 1, que la fricción produjera una "velocidad terminal". Al implementar la fórmula exacta fk=μk·N (constante, no depende de la velocidad), se comprobó que **no hay velocidad terminal con fricción cinética pura** — la aceleración se mantiene constante mientras Fa>fk. La velocidad terminal sí aparece en el otro modo del simulador (rebote), donde la resistencia del aire depende de v² — es un contraste que ayuda a entender la diferencia entre fricción de Coulomb y arrastre aerodinámico.
-4. **Modo 2D:** cuando la fuerza tiene una componente perpendicular a la velocidad inicial, la trayectoria simulada se aparta ligeramente de la curva MRUA ideal, porque la fricción se opone a la velocidad instantánea (que va rotando) y no a la dirección fija de la fuerza aplicada.
+**Preparar antes de grabar:** masa en 2 kg, fuerza aplicada (Fa) en 10 N, fricción desactivada.
 
-**Frase de transición:**
-> "Estos resultados también nos permiten hablar de los límites del modelo que construimos."
+> Hola, soy Antonio Mora Blotta, y fui el desarrollador principal del simulador. Les voy a mostrar la arquitectura técnica y después una demostración en vivo de la segunda ley de Newton.
+>
+> El simulador está hecho en Python, usando la librería pygame. Tiene dos modos, que se seleccionan con las pestañas de arriba: un modo de rebote, que ya existía de un proyecto anterior, y el modo Fuerza Newton, que es el que construimos específicamente para responder a los objetivos de este proyecto.
+>
+> Internamente, el modo Newton separa completamente la física de la interfaz: toda la lógica de fuerzas, aceleración, velocidad y posición vive en una clase que no depende para nada de la ventana gráfica. Eso nos permitió probar la física de forma aislada y automatizada antes de siquiera preocuparnos por cómo se veía en pantalla. Para el cálculo del movimiento usamos integración de Euler, con el mismo paso de tiempo del framerate, aproximadamente un sesentavo de segundo, tal como lo planteamos en el Avance uno.
+>
+> Ahora sí, vamos a la demostración. [**Mostrar el simulador en pantalla completa, modo 1D, sin fricción.**] Como ven, tengo la fuerza aplicada en 10 newtons y la masa en 2 kilogramos. Le doy iniciar. [**Clic en Iniciar.**] Fíjense en el panel de la derecha: la aceleración marca 5 metros por segundo al cuadrado. Eso es exactamente lo que predice la fórmula: 10 newtons entre 2 kilogramos, da 5.
+>
+> Ahora voy a pausar [**Clic en Pausar**], y sin tocar la fuerza, voy a subir la masa a 5 kilogramos [**Mover el slider de masa a 5**]. Reinicio [**Clic en Reset**] e inicio de nuevo [**Clic en Iniciar**]. Miren cómo cambió la aceleración: ahora marca 2 metros por segundo al cuadrado. Misma fuerza, más masa, menos aceleración — la relación inversa de a igual fuerza neta entre masa, en tiempo real.
+>
+> Por último, quiero señalar el diagrama de cuerpo libre, aquí en el centro. [**Señalar los vectores en pantalla.**] Cada flecha representa una fuerza: la azul es la fuerza aplicada, la verde es el peso, la morada es la normal, y si activamos la fricción, aparece una flecha roja. Todas están escaladas proporcionalmente a su magnitud.
+>
+> Ahora José Andrés les va a mostrar qué pasa cuando metemos fricción a la ecuación, y cómo se ve el movimiento en dos dimensiones.
 
----
-
-## 4. Limitaciones y alcance (≈ 1.5–2 min) — Juan Pablo Solano Esquivel (continúa)
-
-**Contenido a cubrir (elegir 3–4, no es necesario leerlas todas):**
-- El método de Euler introduce un error numérico pequeño pero medible (visto en el caso MRUA).
-- No se modela fricción estática: en el modelo, cualquier Fa≠0 mueve el objeto, aunque sea diminuta — en la realidad existe un umbral mínimo.
-- El objeto es puntual: no hay rotación ni tamaño real.
-- El plano es siempre horizontal: no se modelan planos inclinados.
-- El modo Newton no tiene colisiones (a diferencia del modo rebote): el objeto puede desplazarse indefinidamente.
-- El modelo es válido solo para mecánica clásica, a velocidades muy por debajo de la luz — consistente con el alcance planteado desde el Avance 1.
+**Duración estimada leyendo a ritmo normal, sin contar las pausas de la demo:** ~2 min 15 seg + tiempo de demo.
 
 ---
 
-## 5. Conclusiones (≈ 1–1.5 min) — Matías Lutz o Juan Pablo (a definir según ensayo)
+## Clip 3 — José Andrés Picado Corrales (≈ 1.5–2 min)
+### Demo en vivo: fricción cinética y modo 2D
 
-**Contenido a cubrir:**
-1. Se cumplió el objetivo general: el simulador representa fielmente F=m·a con controles interactivos de masa, fuerza y fricción, verificado cuantitativamente con menos de 1% de error atribuible únicamente a la integración numérica.
-2. Se reprodujeron correctamente los casos límite MRU y MRUA, comparando visualmente con las curvas ideales.
-3. El proceso de implementación llevó a un hallazgo físico relevante no anticipado en el Avance 1: la diferencia entre fricción de Coulomb (constante) y arrastre aerodinámico (cuadrático en v) respecto a la existencia de una velocidad terminal.
-4. Como mejora futura: incorporar un integrador de mayor orden (Runge-Kutta 4) para reducir el error numérico, y modelar fricción estática y planos inclinados.
+**Qué mostrar en pantalla:** continuación de la grabación de pantalla, mismo simulador. Preparar: fricción activada, μk = 0.25, Fa = 15 N.
 
-**Cierre:**
-> "Con esto cerramos la presentación. Quedamos atentos a sus preguntas."
+> Hola, soy José Andrés Picado Corrales. Apoyé el desarrollo del simulador, especialmente en las pruebas y en la parte de fricción y diagrama de cuerpo libre. Les voy a mostrar eso ahora.
+>
+> [**Activar el toggle de fricción, mostrar μk en 0.25, Fa constante.**] Aquí ya activé la fricción, con un coeficiente de 0.25. Fíjense en este mensaje que aparece en el panel derecho: nos dice si la fuerza aplicada es mayor, menor o igual a la fricción. Cuando Fa es mayor que la fricción, el objeto acelera de forma constante — no se frena solo, porque la fricción cinética no depende de la velocidad, solo de la normal y de mu-k.
+>
+> Ahora, con el objeto en movimiento, le voy a quitar la fuerza aplicada. [**Bajar Fa a 0 mientras el objeto se mueve.**] Miren cómo desacelera de forma constante hasta detenerse completamente, sin rebotar ni oscilar — eso lo probamos a fondo en el código para asegurarnos de que no hubiera errores numéricos ahí.
+>
+> Por último, les muestro el modo 2D. [**Clic en el botón 2D, poner el ángulo de Fa en 45 grados, iniciar.**] Ahora la fuerza tiene un ángulo, y el objeto traza una trayectoria diagonal. Noten cómo el diagrama de cuerpo libre rota junto con la dirección de la fuerza aplicada, en tiempo real.
+>
+> Para cerrar esta parte: hicimos varias pruebas automatizadas sobre el simulador antes de darlo por terminado — verificamos que F igual a m por a se cumpliera, que el movimiento rectilíneo uniforme y el uniformemente acelerado se reprodujeran correctamente, que la fricción frenara sin oscilaciones, y que el botón de reinicio y el cambio de modo funcionaran bien. Con la simulación funcionando y probada, le paso la palabra a Juan Pablo, que les va a explicar qué dicen estos resultados desde el punto de vista físico.
+
+**Duración estimada leyendo a ritmo normal, sin contar las pausas de la demo:** ~1 min 30 seg + tiempo de demo.
 
 ---
 
-## 6. Defensa — posibles preguntas y quién responde
+## Clip 4 — Juan Pablo Solano Esquivel (≈ 4.5–5 min)
+### Análisis de resultados, limitaciones y conclusiones
 
-Repasar esto en el ensayo; cualquier integrante debe poder responder lo básico, pero se sugiere una primera línea de respuesta por tema:
+**Qué mostrar en pantalla:** el gráfico de posición vs. tiempo del simulador (curva simulada vs. curvas ideales MRU/MRUA) — puede ser una captura de pantalla, o el informe final mostrando la Figura 1. Caso de referencia: Fa=10N, m=1kg, sin fricción.
+
+> Hola, soy Juan Pablo Solano Esquivel. Mi parte en el equipo fue la documentación, y en esta sección les voy a compartir el análisis de resultados, las limitaciones del modelo, y las conclusiones del proyecto.
+>
+> Empecemos con los resultados. Cuando la fuerza neta es cero, el simulador reproduce un movimiento rectilíneo uniforme perfecto: una línea recta en el gráfico de posición, sin ningún error numérico, porque integrar una velocidad constante es matemáticamente exacto.
+>
+> Cuando la fuerza neta es constante y distinta de cero, probamos el caso de 10 newtons aplicados sobre 1 kilogramo, sin fricción, durante 5 segundos. El valor teórico esperado era una posición de 125 metros. El simulador nos dio 124.5 metros — una diferencia de apenas 0.4 por ciento. Esa pequeña diferencia no es un error de física, es el error numérico propio del método de integración de Euler que usamos, y lo dejamos documentado en el informe.
+>
+> Ahora, el hallazgo que más nos llamó la atención durante el desarrollo: en el planteamiento inicial del proyecto, esperábamos que la fricción produjera una "velocidad terminal", como cuando cae un objeto en el aire. Pero al implementar la fórmula exacta de la fricción cinética, que es constante y no depende de la velocidad, nos dimos cuenta de que eso no ocurre. Mientras la fuerza aplicada sea mayor que la fricción, la aceleración se mantiene constante indefinidamente. La velocidad terminal sí aparece, pero en el otro modo del simulador, el modo de rebote, donde la resistencia del aire sí depende de la velocidad al cuadrado. Ese contraste nos ayudó a entender mejor la diferencia real entre fricción de Coulomb y arrastre aerodinámico — algo que el planteamiento original no distinguía con tanta claridad.
+>
+> También notamos que en el modo 2D, cuando la fuerza tiene una componente perpendicular a la velocidad inicial, la trayectoria simulada se separa un poco de la curva ideal, porque la fricción se opone a la velocidad instantánea, que va rotando, y no a la dirección fija de la fuerza aplicada.
+>
+> Pasando a las limitaciones del modelo: primero, el método de Euler introduce un pequeño error numérico, como ya mencioné. Segundo, no modelamos fricción estática, así que en el simulador cualquier fuerza aplicada, por pequeña que sea, mueve el objeto — en la realidad existe un umbral mínimo antes de que algo empiece a moverse. Tercero, el objeto es puntual: no tiene rotación ni tamaño real. Y cuarto, el plano siempre es horizontal, no modelamos planos inclinados, y el modo Newton no tiene colisiones, así que el objeto se puede desplazar indefinidamente.
+>
+> Para cerrar, nuestras conclusiones. Cumplimos el objetivo general del proyecto: el simulador representa fielmente la relación F igual a m por a, con controles interactivos de masa, fuerza y fricción, y lo verificamos cuantitativamente con un margen de error menor al uno por ciento, atribuible únicamente a la integración numérica. Reprodujimos correctamente los dos casos límite de la cinemática, el MRU y el MRUA, comparándolos visualmente contra las curvas ideales. Y, como les comenté, el proceso de construir el simulador nos llevó a un hallazgo físico que no habíamos anticipado: la diferencia entre la fricción de Coulomb y el arrastre aerodinámico respecto a la velocidad terminal. Como mejora futura, proponemos incorporar un método de integración más preciso, como Runge-Kutta de cuarto orden, y modelar fricción estática y planos inclinados para ampliar el alcance educativo del simulador.
+>
+> Con esto cerramos la presentación de nuestro proyecto. Muchas gracias por su atención, y quedamos atentos a sus preguntas.
+
+**Duración estimada leyendo a ritmo normal:** ~4 min 30 seg.
+
+---
+
+## Defensa — posibles preguntas y quién responde
+
+Aunque los clips se graban por separado, todos deben poder responder preguntas en vivo el día de la exposición. Repasar esta tabla antes:
 
 | Pregunta probable | Responde primero | Puntos clave de la respuesta |
 |---|---|---|
@@ -138,55 +122,28 @@ Repasar esto en el ensayo; cualquier integrante debe poder responder lo básico,
 | ¿Cómo decidieron los rangos de los sliders (masa, fuerza, μk)? | José Andrés | Rangos elegidos para cubrir casos pedagógicamente interesantes (desde casi sin masa hasta objetos pesados) sin volver la simulación numéricamente inestable. |
 | ¿Qué pasaría si aumentan mucho el Δt? | Antonio | El error de Euler crece proporcionalmente a Δt; con pasos muy grandes la simulación se volvería visiblemente imprecisa o inestable. |
 | ¿Por qué extendieron el código existente en vez de reescribirlo? | Antonio o José Andrés | El sandbox de rebote ya era funcional y correcto; extenderlo evitó duplicar trabajo y permitió reutilizar los widgets de interfaz ya probados. |
-| ¿Qué mejorarían del simulador? | Cualquiera (ver sección 5) | Integrador de mayor orden, fricción estática, planos inclinados, colisiones en modo Newton. |
+| ¿Qué mejorarían del simulador? | Cualquiera | Integrador de mayor orden, fricción estática, planos inclinados, colisiones en modo Newton. |
 
 ---
 
-## Resumen de tiempos (objetivo: 12–13 min, dentro del rango 10–15)
+## Resumen de tiempos
 
-| Sección | Responsable(s) | Tiempo aprox. |
-|---|---|---|
-| 0. Apertura | Todos | 1 min |
-| 1. Planteamiento y diseño | Matías | 3 min |
-| 2. Implementación y demo en vivo | Antonio + José Andrés | 4.5 min |
-| 3. Análisis de resultados | Juan Pablo | 3 min |
-| 4. Limitaciones | Juan Pablo | 1.5 min |
-| 5. Conclusiones | Matías / Juan Pablo | 1.5 min |
-| **Total** | | **~13 min** |
+| Clip | Integrante | Contenido | Tiempo aprox. |
+|---|---|---|---|
+| 1 | Matías Lutz | Planteamiento y marco teórico | ~3 min |
+| 2 | Antonio Mora Blotta | Arquitectura + demo F=m·a | ~2.5 min |
+| 3 | José Andrés Picado Corrales | Demo fricción y modo 2D | ~1.5–2 min |
+| 4 | Juan Pablo Solano Esquivel | Análisis, limitaciones y conclusiones | ~4.5–5 min |
+| **Total (video editado)** | | | **~12–14 min** |
 
-*(La sección de preguntas/defensa no cuenta en el tiempo de exposición formal, pero hay que estar preparados para extenderse unos minutos más.)*
+*(Los tiempos de demo en vivo dentro de los clips 2 y 3 se suman aparte del tiempo de habla — al editar, dejar que la acción en pantalla respire un par de segundos antes de seguir hablando.)*
 
 ---
 
-## 7. Video de respaldo — cada integrante graba su propia parte
+## Cómo grabar y enviar tu clip
 
-El equipo mantiene un repositorio compartido en GitHub con todo el proyecto (código, informe, este guión). Además de ensayar la exposición en vivo, **cada integrante graba en video únicamente la sección que le corresponde según este guión**, como respaldo ante cualquier problema técnico el día de la exposición.
-
-### Qué graba cada quien
-
-| Integrante | Qué grabar | Referencia en este guión |
-|---|---|---|
-| **Matías Lutz** | Planteamiento, fenómeno físico, objetivos y marco teórico | Sección 1 |
-| **Antonio Mora Blotta** | Arquitectura técnica + demo en vivo de F=m·a (masa/fuerza) | Secciones 2.1–2.2 |
-| **José Andrés Picado Corrales** | Demo en vivo de fricción y modo 2D | Sección 2.3 |
-| **Juan Pablo Solano Esquivel** | Análisis de resultados y limitaciones del modelo | Secciones 3–4 |
-
-La sección 0 (apertura) y la 5 (conclusiones) se pueden grabar en conjunto al inicio/cierre del video de Matías o Juan Pablo, o dejarse fuera del respaldo en video (son las partes más fáciles de improvisar en vivo si hiciera falta).
-
-### Cómo grabar
-
-1. Repasa tu parte del guión (secciones arriba) y ten a mano el simulador ya abierto si tu parte incluye demo en vivo.
-2. Graba tu clip en una sola toma si es posible (más fácil de editar/unir después).
-3. Para las partes de **demo en vivo** (Antonio, José Andrés): graba la pantalla completa con `Win + Alt + R` (Xbox Game Bar, ya viene en Windows) mientras hablas y usas el simulador.
-4. Para las partes de **exposición teórica** (Matías, Juan Pablo): puede ser cámara/webcam hablando directo, o pantalla mostrando el informe mientras explicas.
-5. Sigue las especificaciones técnicas y el proceso de envío detallados en [`videos/VIDEOS.md`](./videos/VIDEOS.md) dentro del repositorio — ahí subes el enlace de tu video (no el archivo directamente, pesa demasiado).
-
-### Cómo enviar tu parte al repositorio (sin necesidad de instalar nada)
-
-1. Entra al repositorio del proyecto en GitHub (el enlace lo comparte quien lo administra).
-2. Abre el archivo `videos/VIDEOS.md`.
-3. Haz clic en el ícono de lápiz (✎, "Edit this file") arriba a la derecha del archivo.
-4. Pega el enlace de tu video en la fila que te corresponde y cambia el estado a "✅ Listo".
-5. Baja hasta el final de la página y da clic en **"Commit changes"** (puedes dejar el mensaje por defecto).
-
-Con eso queda guardado en el repositorio sin necesidad de usar la terminal ni instalar git — se hace todo desde el navegador.
+1. Repasa tu texto (arriba) en voz alta un par de veces antes de la toma final.
+2. Si tu parte incluye demo en vivo (clips 2 y 3): graba la pantalla completa con `Win + Alt + R` (Xbox Game Bar, viene incluido en Windows) mientras hablás y usás el simulador. Ten el simulador ya abierto y en el estado inicial correcto (ver la sección "Preparar antes de grabar" de tu clip) antes de darle a grabar.
+3. Si tu parte es solo explicación (clips 1 y 4): puede ser cámara/webcam hablando directo, o pantalla mostrando el informe/gráfico mientras explicás.
+4. Sube tu archivo a Google Drive y compártelo como "Cualquier persona con el enlace — Lector".
+5. Agrega tu enlace en [`videos/VIDEOS.md`](./videos/VIDEOS.md) dentro del repositorio del proyecto — instrucciones detalladas ahí, incluyendo cómo hacerlo desde el navegador sin instalar nada.
