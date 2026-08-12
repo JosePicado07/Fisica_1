@@ -163,7 +163,6 @@ OBJECT_DEFS = [
         "drag_coeff": 1.2,    # Cd
         "cross_area": 0.005,  # m²  (large for its mass)
         "color": (255, 255, 220),
-        "emoji": "🪶",
         "icon_shape": "feather",
     },
     {
@@ -175,7 +174,6 @@ OBJECT_DEFS = [
         "drag_coeff": 0.47,
         "cross_area": 0.00126,
         "color": (255, 200, 50),
-        "emoji": "🏓",
         "icon_shape": "circle",
     },
     {
@@ -187,7 +185,6 @@ OBJECT_DEFS = [
         "drag_coeff": 0.55,
         "cross_area": 0.0034,
         "color": (200, 255, 50),
-        "emoji": "🎾",
         "icon_shape": "circle",
     },
     {
@@ -199,7 +196,6 @@ OBJECT_DEFS = [
         "drag_coeff": 0.35,
         "cross_area": 0.0042,
         "color": (240, 240, 240),
-        "emoji": "⚾",
         "icon_shape": "circle",
     },
     {
@@ -211,7 +207,6 @@ OBJECT_DEFS = [
         "drag_coeff": 0.80,
         "cross_area": 0.008,
         "color": (140, 130, 120),
-        "emoji": "🪨",
         "icon_shape": "rock",
     },
     {
@@ -223,7 +218,6 @@ OBJECT_DEFS = [
         "drag_coeff": 0.47,
         "cross_area": 0.0366,
         "color": (40, 40, 60),
-        "emoji": "🎳",
         "icon_shape": "circle",
     },
     {
@@ -235,7 +229,6 @@ OBJECT_DEFS = [
         "drag_coeff": 0.47,
         "cross_area": 0.0201,
         "color": (100, 100, 110),
-        "emoji": "⚫",
         "icon_shape": "circle",
     },
     {
@@ -247,7 +240,6 @@ OBJECT_DEFS = [
         "drag_coeff": 2.0,
         "cross_area": 0.06,
         "color": (245, 245, 250),
-        "emoji": "📄",
         "icon_shape": "square",
     },
 ]
@@ -563,11 +555,21 @@ class Button:
         border_c = tuple(min(255, v + 45) for v in c)
         pygame.draw.rect(surf, border_c, self.rect, 1, border_radius=6)
 
-        txt = font_md.render(self.label, True, WHITE)
+        font = font_md
+        txt = font.render(self.label, True, WHITE)
+        # Fall back to the smaller font if the label would overflow the
+        # button at the normal size -- keeps custom labels safe by construction.
+        if txt.get_width() > self.rect.w - 16:
+            font = font_title
+            txt = font.render(self.label, True, WHITE)
+
         if self.icon:
-            icon_size = max(6, self.rect.h // 5)
-            gap = 8
+            icon_size = max(5, self.rect.h // 6)
+            gap = 6
             total_w = icon_size * 2 + gap + txt.get_width()
+            if total_w > self.rect.w - 8:
+                icon_size = max(4, icon_size - 2)
+                total_w = icon_size * 2 + gap + txt.get_width()
             start_x = self.rect.centerx - total_w // 2
             draw_icon(surf, self.icon, start_x + icon_size, self.rect.centery, icon_size, WHITE)
             tr = txt.get_rect(midleft=(start_x + icon_size * 2 + gap, self.rect.centery))
@@ -899,7 +901,7 @@ class Game:
 
         # ── UI WIDGETS ──
         px = WIDTH - 268
-        py_start = 400
+        py_start = 426  # leaves clearance below the "PARÁMETROS" section header
         sp = 46
 
         self.sl_gravity = Slider(px, py_start, 240, "Gravedad (m/s²)", 0.0, 30.0, 9.81, "{:.2f}", ACCENT)
@@ -948,7 +950,7 @@ class Game:
         self.n_btn_dir_right = Button(lpx + 92, py0 + sp * 6 + 4, 84, 26, "+x ►", ACCENT)
 
         self.n_btn_start = Button(lpx, py0 + sp * 7 + 8, 84, 32, "INICIAR", ACCENT3, icon="play")
-        self.n_btn_reset = Button(lpx + 92, py0 + sp * 7 + 8, 84, 32, "REINICIAR", RED, icon="reset")
+        self.n_btn_reset = Button(lpx + 92, py0 + sp * 7 + 8, 84, 32, "RESET", RED, icon="reset")
 
         self.n_tg_ideal = ToggleButton(lpx, py0 + sp * 8 + 12, 176, "Curvas ideales", True, PURPLE)
 
@@ -1270,15 +1272,14 @@ class Game:
         # Physics data
         dx = rpx + 10
         dy = 14
-        txt_p = font_lg.render("📊 DATOS EN VIVO", True, ACCENT3)
-        screen.blit(txt_p, (dx, dy))
+        draw_section_header(screen, "DATOS EN VIVO", dx, dy, ACCENT3)
         dy += 28
 
         obj = self.selected_obj
         if obj and obj in self.objects:
             # Object info header
             pygame.draw.rect(screen, DARK, (dx, dy, 256, 24), border_radius=4)
-            screen.blit(font_md.render(f"▸ {obj.name} ({obj.mass}kg)", True, YELLOW), (dx + 6, dy + 4))
+            screen.blit(font_md.render(f"{obj.name} ({obj.mass}kg)", True, YELLOW), (dx + 8, dy + 4))
             dy += 32
 
             data_lines = [
@@ -1332,7 +1333,7 @@ class Game:
         # ── SLIDERS / CONTROLS ──
         dy = 392
         pygame.draw.line(screen, PANEL_BORDER, (rpx + 10, dy - 8), (rpx + 266, dy - 8), 1)
-        screen.blit(font_lg.render("⚙ PARÁMETROS", True, ORANGE), (rpx + 10, dy - 4))
+        draw_section_header(screen, "PARÁMETROS", rpx + 10, dy - 4, ORANGE)
 
         for s in self.sliders:
             s.draw(screen)
@@ -1468,7 +1469,8 @@ class Game:
         self.n_btn_dim2d.color = ACCENT if ns.dim_mode == "2D" else DIM
         self.n_btn_dir_left.color = ACCENT if ns.fa_sign < 0 else DIM
         self.n_btn_dir_right.color = ACCENT if ns.fa_sign > 0 else DIM
-        self.n_btn_start.label = "⏸ Pausar" if ns.running else "▶ Iniciar"
+        self.n_btn_start.label = "PAUSAR" if ns.running else "INICIAR"
+        self.n_btn_start.icon = "pause" if ns.running else "play"
         self.n_btn_start.color = ORANGE if ns.running else ACCENT3
 
     def _n_world_to_screen(self, wx, wy):
@@ -1485,7 +1487,7 @@ class Game:
         left_panel = pygame.Rect(0, 0, 196, HEIGHT)
         pygame.draw.rect(screen, PANEL_BG, left_panel)
         pygame.draw.line(screen, PANEL_BORDER, (196, 0), (196, HEIGHT), 2)
-        screen.blit(font_lg.render("🧲 CONTROLES", True, ACCENT2), (14, 34))
+        draw_section_header(screen, "CONTROLES", 14, 34, ACCENT2)
 
         for s in self.n_sliders:
             s.draw(screen)
@@ -1505,7 +1507,7 @@ class Game:
 
         dx = rpx + 10
         dy = 34
-        screen.blit(font_lg.render("📊 DATOS EN VIVO", True, ACCENT3), (dx, dy))
+        draw_section_header(screen, "DATOS EN VIVO", dx, dy, ACCENT3)
         dy += 30
 
         fa_mag = math.hypot(*ns.fa_vec)

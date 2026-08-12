@@ -9,9 +9,11 @@
 
 **Preparación técnica previa (antes de entrar al salón):**
 - Tener `physics_playground.py` corriendo y probado en la laptop que se usará.
-- Tener el modo Newton ya seleccionado (pestaña "🧲 Fuerza Newton") para no perder tiempo buscándolo en vivo.
+- Tener el modo Newton ya seleccionado (pestaña "FUERZA NEWTON") para no perder tiempo buscándolo en vivo.
 - Tener valores de ejemplo ya decididos de antemano (ver sugerencias en cada sección).
 - Tener el informe final (PDF) y este simulador accesibles sin depender de internet.
+
+**Respaldo en video:** además de la exposición en vivo, el equipo prepara un video de respaldo — cada integrante graba únicamente su propia sección (ver sección 7 de este documento). Sirve como respaldo ante fallos técnicos el día de la exposición y, opcionalmente, como demostración adicional si el profesor lo permite.
 
 ---
 
@@ -153,3 +155,38 @@ Repasar esto en el ensayo; cualquier integrante debe poder responder lo básico,
 | **Total** | | **~13 min** |
 
 *(La sección de preguntas/defensa no cuenta en el tiempo de exposición formal, pero hay que estar preparados para extenderse unos minutos más.)*
+
+---
+
+## 7. Video de respaldo — cada integrante graba su propia parte
+
+El equipo mantiene un repositorio compartido en GitHub con todo el proyecto (código, informe, este guión). Además de ensayar la exposición en vivo, **cada integrante graba en video únicamente la sección que le corresponde según este guión**, como respaldo ante cualquier problema técnico el día de la exposición.
+
+### Qué graba cada quien
+
+| Integrante | Qué grabar | Referencia en este guión |
+|---|---|---|
+| **Matías Lutz** | Planteamiento, fenómeno físico, objetivos y marco teórico | Sección 1 |
+| **Antonio Mora Blotta** | Arquitectura técnica + demo en vivo de F=m·a (masa/fuerza) | Secciones 2.1–2.2 |
+| **José Andrés Picado Corrales** | Demo en vivo de fricción y modo 2D | Sección 2.3 |
+| **Juan Pablo Solano Esquivel** | Análisis de resultados y limitaciones del modelo | Secciones 3–4 |
+
+La sección 0 (apertura) y la 5 (conclusiones) se pueden grabar en conjunto al inicio/cierre del video de Matías o Juan Pablo, o dejarse fuera del respaldo en video (son las partes más fáciles de improvisar en vivo si hiciera falta).
+
+### Cómo grabar
+
+1. Repasa tu parte del guión (secciones arriba) y ten a mano el simulador ya abierto si tu parte incluye demo en vivo.
+2. Graba tu clip en una sola toma si es posible (más fácil de editar/unir después).
+3. Para las partes de **demo en vivo** (Antonio, José Andrés): graba la pantalla completa con `Win + Alt + R` (Xbox Game Bar, ya viene en Windows) mientras hablas y usas el simulador.
+4. Para las partes de **exposición teórica** (Matías, Juan Pablo): puede ser cámara/webcam hablando directo, o pantalla mostrando el informe mientras explicas.
+5. Sigue las especificaciones técnicas y el proceso de envío detallados en [`videos/VIDEOS.md`](./videos/VIDEOS.md) dentro del repositorio — ahí subes el enlace de tu video (no el archivo directamente, pesa demasiado).
+
+### Cómo enviar tu parte al repositorio (sin necesidad de instalar nada)
+
+1. Entra al repositorio del proyecto en GitHub (el enlace lo comparte quien lo administra).
+2. Abre el archivo `videos/VIDEOS.md`.
+3. Haz clic en el ícono de lápiz (✎, "Edit this file") arriba a la derecha del archivo.
+4. Pega el enlace de tu video en la fila que te corresponde y cambia el estado a "✅ Listo".
+5. Baja hasta el final de la página y da clic en **"Commit changes"** (puedes dejar el mensaje por defecto).
+
+Con eso queda guardado en el repositorio sin necesidad de usar la terminal ni instalar git — se hace todo desde el navegador.
