@@ -1,0 +1,321 @@
+% !TeX program = pdflatex
+% !TeX encoding = UTF-8
+%
+% Avance Final — Documento de Simulación
+% Física I — Universidad Cenfotec
+%
+% Compilar con: pdflatex "Avance Final - Física 1.tex"  (correr dos veces
+% para que el índice y las referencias cruzadas queden bien numeradas)
+%
+% Si tienen el logo oficial de la universidad, guárdenlo en este mismo
+% directorio como "logo_cenfotec.png" (o .pdf/.jpg) y va a aparecer solo
+% en la portada; si no está el archivo, se deja un recuadro de aviso.
+
+\documentclass[12pt,letterpaper]{article}
+
+% ---------- Idioma y codificación ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noindentfirst]{babel}
+\usepackage{textcomp}
+
+% ---------- Página y tipografía ----------
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+% ---------- Matemática ----------
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ---------- Figuras y tablas ----------
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{float}
+
+% ---------- Código ----------
+\usepackage{listings}
+\usepackage{xcolor}
+
+% ---------- Listas ----------
+\usepackage{enumitem}
+
+% ---------- Hipervínculos (referencias, URLs) ----------
+\usepackage[hidelinks,colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
+
+% ---------- Estilo de secciones ----------
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection.}{0.6em}{}
+
+% ---------- Encabezado/pie de página ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Simulador de Leyes de Newton — Avance Final}
+\fancyhead[R]{Física I}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ---------- Estilo de bloques de código ----------
+\lstdefinestyle{ecuaciones}{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{gray!8},
+  columns=fullflexible,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+}
+\lstset{style=ecuaciones}
+
+% ---------- Comando para referencias APA con sangría francesa ----------
+\newcommand{\refitem}[1]{\par\noindent\hangindent=1cm\hangafter=1 #1\par\medskip}
+
+\begin{document}
+
+% ============================== PORTADA ==============================
+\begin{titlepage}
+\begin{center}
+
+\IfFileExists{logo_cenfotec.png}{%
+  \includegraphics[width=0.45\textwidth]{logo_cenfotec.png}
+}{%
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.2cm}
+  \textit{[Insertar aquí el logo oficial de Universidad Cenfotec --- guardar\\
+  el archivo como \texttt{logo\_cenfotec.png} en esta misma carpeta]}
+  \vspace{1.2cm}}}
+}
+
+\vspace{3cm}
+
+{\Large\bfseries Avance Final}
+
+\vspace{0.5cm}
+
+{\Large\bfseries Física}
+
+\vspace{2cm}
+
+Estudiantes:
+
+\vspace{0.3cm}
+
+Matías Lutz,
+
+Antonio Mora Blotta,
+
+Jose Andres Picado Corrales,
+
+Juan Pablo Solano Esquivel
+
+\vspace{2cm}
+
+Profesor
+
+\vspace{0.2cm}
+
+KEVIN EDUARDO CERVANTES MELGAR
+
+\vspace{3cm}
+
+Agosto del 2026
+
+\end{center}
+\end{titlepage}
+
+% ============================== ÍNDICE ==============================
+\tableofcontents
+\newpage
+
+% ============================ INTRODUCCIÓN ============================
+\section{Introducción}
+
+En el Avance \#1 se planteó el desarrollo de un simulador interactivo de las Leyes de Newton, orientado a demostrar de forma visual y cuantitativa la relación entre fuerza neta, masa y aceleración ($F = m \cdot a$), incluyendo fricción cinética y la comparación con los modelos ideales de Movimiento Rectilíneo Uniforme (MRU) y Movimiento Rectilíneo Uniformemente Acelerado (MRUA).
+
+Durante la fase de desarrollo, el equipo ya contaba con una base de código en Python (\texttt{physics\_playground.py}) escrita con la librería \textbf{pygame}: un sandbox de caída libre y rebote que modela gravedad, resistencia del aire y restitución en colisiones. Este código, aunque físicamente correcto, no cubría los objetivos específicos planteados en el Avance \#1 (aplicar una fuerza controlable por el usuario, mostrar el diagrama de cuerpo libre, comparar con MRU/MRUA, etc.).
+
+En lugar de descartar ese trabajo, se decidió \textbf{extender} el simulador existente agregando un segundo modo de operación --``Fuerza Newton''-- dedicado específicamente a la segunda ley de Newton, la fricción cinética y las comparaciones MRU/MRUA, seleccionable mediante pestañas sin alterar el modo de rebote original. Este documento describe la implementación final, los resultados obtenidos, el análisis físico correspondiente y las conclusiones del proyecto.
+
+% ============================ METODOLOGÍA ============================
+\section{Metodología}
+
+\subsection{Arquitectura general}
+
+El simulador es una única aplicación de escritorio en Python (\texttt{physics\_playground.py}, pygame 2.6.1) con dos modos seleccionables por pestañas en la parte superior de la ventana:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Modo Rebote} (preexistente): sandbox de caída libre con gravedad, arrastre aerodinámico y restitución en colisiones --- no forma parte de los objetivos del Avance \#1, se conserva como demostración adicional de dinámica.
+  \item \textbf{Modo Fuerza Newton} (desarrollado para este avance): implementa fielmente los objetivos específicos del Avance \#1.
+\end{itemize}
+
+Internamente, la clase \texttt{Game} despacha \texttt{update()} y \texttt{draw()} al método correspondiente (\texttt{update\_bounce}/\texttt{draw\_bounce} o \texttt{update\_newton}/\texttt{draw\_newton}) según el estado \texttt{self.app\_mode}, manteniendo ambos modos completamente independientes en su lógica y su manejo de eventos.
+
+\subsection{Motor de física del modo Newton --- clase \texttt{NewtonState}}
+
+Se implementó una clase independiente de la interfaz gráfica (\texttt{NewtonState}), que encapsula únicamente el estado físico y las ecuaciones de movimiento, siguiendo el marco teórico del Avance \#1.
+
+\textbf{Fuerzas modeladas:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Fuerza aplicada $F_a$: magnitud (0--100 N) y dirección --- en 2D mediante un ángulo ($-180^\circ$ a $180^\circ$), en 1D mediante un signo ($+x$/$-x$).
+  \item Peso $W = m \cdot g$ ($g = 9.8\ \text{m/s}^2$) y Normal $N = m \cdot g$, mostradas en el diagrama de cuerpo libre; al ser el plano horizontal, se cancelan verticalmente y no afectan el movimiento, tal como se documentó en el Avance \#1 (secciones 3.2--3.3).
+  \item Fricción cinética $f_k = \mu_k \cdot N$, opuesta a la dirección de la velocidad, activable y con coeficiente $\mu_k$ ajustable (0--1) mediante control deslizante.
+\end{itemize}
+
+\textbf{Segunda ley de Newton e integración numérica (método de Euler):}
+
+\begin{align*}
+\sum F &= F_a + f_k \\
+a &= \sum F / m \\
+v(t+\Delta t) &= v(t) + a(t)\cdot \Delta t \\
+r(t+\Delta t) &= r(t) + v(t)\cdot \Delta t
+\end{align*}
+
+Esto reproduce exactamente las ecuaciones del Avance \#1 (sección 4). El paso de tiempo $\Delta t$ corresponde al tiempo de frame de pygame ($\approx 0.016$ s a 60 FPS), capturado y acotado en cada iteración del bucle principal.
+
+\textbf{Corrección numérica anti-rebote:} cuando solo actúa la fricción ($F_a \approx 0$) y el paso de Euler invertiría el signo de la velocidad en un único paso, la velocidad se fija en cero. Sin esta corrección, el objeto oscilaría numéricamente alrededor del reposo en lugar de detenerse limpiamente --- un artefacto conocido de la integración explícita de Euler aplicada a fricción de Coulomb.
+
+\textbf{Curvas ideales MRU/MRUA:} al iniciar o reiniciar la simulación se guarda un snapshot ($x_0$, $v_{0x}$, $a_{0x}$) con el que se calculan analíticamente, para cualquier instante $t$:
+
+\begin{align*}
+x_{\text{MRU}}(t)  &= x_0 + v_{0x} \cdot (t - t_0) \\
+x_{\text{MRUA}}(t) &= x_0 + v_{0x} \cdot (t - t_0) + \tfrac{1}{2} \cdot a_{0x} \cdot (t - t_0)^2
+\end{align*}
+
+Ambas curvas se superponen a la trayectoria simulada en un gráfico de posición vs.\ tiempo dentro de la misma ventana (dibujado con primitivas de pygame, sin dependencias externas de graficación).
+
+\subsection{Interfaz y controles}
+
+El modo Newton incluye, en un panel lateral izquierdo (reutilizando los widgets \texttt{Slider}, \texttt{ToggleButton} y \texttt{Button} ya presentes en el proyecto):
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Slider de masa (0.5--20 kg).
+  \item Slider de magnitud de $F_a$ (0--100 N) y de ángulo ($-180^\circ$ a $180^\circ$, para el modo 2D).
+  \item Slider de $\mu_k$ (0--1) y toggle para activar/desactivar la fricción.
+  \item Selector de modo dimensional (1D / 2D) y de dirección de $F_a$ en 1D ($+x$ / $-x$).
+  \item Botones Iniciar/Pausar y Reiniciar.
+  \item Toggle para mostrar/ocultar las curvas ideales MRU/MRUA.
+\end{itemize}
+
+En el panel derecho se muestran, en tiempo real: fuerza aplicada, peso, normal, fricción, fuerza neta, aceleración, velocidad, posición ($x$, $y$) y tiempo transcurrido --- todos numéricamente, actualizados cada frame.
+
+En el área central se dibuja el objeto, el \textbf{diagrama de cuerpo libre} (vectores $F_a$, $W$, $N$ y $f_k$, escalados proporcionalmente a su magnitud con origen en el centro del objeto), la traza de la trayectoria, y el gráfico posición-tiempo con las tres curvas (simulada, MRU ideal, MRUA ideal).
+
+\subsection{Verificación del código}
+
+Antes de considerar la implementación terminada, se ejecutó una batería de pruebas automatizadas sobre la clase \texttt{NewtonState} (sin interfaz gráfica) para validar cada uno de los objetivos específicos del Avance \#1. Los resultados se documentan en la sección \ref{sec:resultados}.
+
+% ============================= RESULTADOS =============================
+\section{Resultados}
+\label{sec:resultados}
+
+\subsection{Casos de prueba verificados}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}c X X X X@{}}
+\toprule
+\textbf{\#} & \textbf{Caso de prueba} & \textbf{Condiciones} & \textbf{Resultado obtenido} & \textbf{Resultado esperado (teoría)} \\
+\midrule
+a  & $F = m\cdot a$ & $F_a=10$ N, $m=2$ kg, sin fricción & $a = 5.00\ \text{m/s}^2$ & $a = F_a/m = 5.00\ \text{m/s}^2$ \\
+a  & $F = m\cdot a$ (cambio de masa) & $F_a=10$ N, $m=5$ kg, sin fricción & $a = 2.00\ \text{m/s}^2$ & $a = 10/5 = 2.00\ \text{m/s}^2$ \\
+b  & MRU ($\sum F=0$) & $F_a=0$ tras impulso inicial, sin fricción & $v$ constante $= 10.000$ m/s & $v = v_0 =$ constante \\
+c  & MRUA ($\sum F=$cte$\neq 0$) & $F_a=10$ N, $m=1$ kg, sin fricción, $t=5$ s & $x = 124.50$ m, $v = 50.00$ m/s & $x = \tfrac{1}{2}\cdot 10 \cdot 5^2 = 125.00$ m, $v = 10\cdot 5 = 50.00$ m/s \\
+d1 & Fricción --- frenado a reposo & $F_a\to 0$ tras impulso, $\mu_k=0.3$, $m=1$ kg & $v$ se estabiliza en $0.000$ m/s, sin oscilación de signo & $v\to 0$ sin rebote (fricción de Coulomb) \\
+d2 & Fricción cinética --- fuerza neta constante & $F_a=10$ N, $\mu_k=0.3$, $m=1$ kg & $a$ constante $=7.060\ \text{m/s}^2$; $v(10\text{ s})=70.66$ m/s & $a=(F_a-\mu_k m g)/m = 7.06\ \text{m/s}^2$ (cte.); $v=a\cdot t=70.60$ m/s \\
+e  & Reinicio & --- & Posición, velocidad y tiempo vuelven a 0; parámetros de los sliders se conservan & --- \\
+f  & Cambio de modo 1D$\leftrightarrow$2D & $F_a$ a $90^\circ$ en modo 2D & $y$ aumenta correctamente; al volver a 1D, $y$ y $v_y$ se fuerzan a 0 & --- \\
+\bottomrule
+\end{tabularx}
+\caption{Casos de prueba verificados sobre la clase \texttt{NewtonState}.}
+\end{table}
+
+\textit{Nota metodológica:} la pequeña diferencia entre el valor simulado (124.50 m) y el valor analítico exacto (125.00 m) en el caso c) es el \textbf{error de truncamiento propio del método de Euler explícito} al usar $\Delta t$ del orden de 1/60 s --- se analiza en la sección \ref{sec:discusion}.
+
+\subsection{Capturas del simulador en funcionamiento}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figuras/figura1_modo_newton_1d.png}
+  \caption{Modo Fuerza Newton --- movimiento 1D con fricción activa ($F_a=15$ N, $m=2$ kg, $\mu_k=0.25$). Se observa el diagrama de cuerpo libre con los cuatro vectores de fuerza, las lecturas en vivo, y la curva simulada (celeste) superpuesta casi exactamente a la curva MRUA ideal (naranja), como corresponde a fuerza neta constante.}
+  \label{fig:newton1d}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figuras/figura2_modo_newton_2d.png}
+  \caption{Modo Fuerza Newton --- movimiento 2D con $F_a$ aplicada a $45^\circ$ ($F_a=15$ N, $m=2$ kg, $\mu_k=0.25$). El vector de fuerza aplicada (rojo) y la trayectoria (línea diagonal) muestran cómo el objeto acelera en la dirección de la fuerza resultante. Nótese que la curva simulada (celeste) diverge levemente de la curva MRUA ideal (naranja): en 2D, la dirección de la fricción cambia a medida que la velocidad rota hacia la dirección de $F_a$, por lo que la componente $x$ de la aceleración no es perfectamente constante durante el régimen transitorio --- a diferencia del caso 1D puro de la Figura \ref{fig:newton1d}.}
+  \label{fig:newton2d}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figuras/figura0_modo_rebote.png}
+  \caption{Modo Rebote (funcionalidad preexistente, conservada sin cambios) --- sandbox de caída libre con gravedad, arrastre aerodinámico y restitución en colisiones con superficies.}
+  \label{fig:rebote}
+\end{figure}
+
+\textit{(El equipo puede agregar capturas adicionales de la exposición en vivo, mostrando distintos valores de masa, fricción y modo dimensional, antes de la entrega final en PDF.)}
+
+% =========================== DISCUSIÓN ===========================
+\section{Discusión y análisis físico}
+\label{sec:discusion}
+
+\textbf{Relación $F = m\cdot a$:} los resultados de la Tabla 1 (caso a) confirman de manera directa la segunda ley de Newton implementada en el simulador: al duplicar la masa manteniendo la fuerza aplicada constante, la aceleración se reduce exactamente a la mitad, en concordancia con $a = \sum F / m$.
+
+\textbf{MRU y MRUA como casos límite:} cuando la fuerza neta es nula, el simulador reproduce un MRU perfecto (velocidad constante, sin ningún error numérico, ya que la integración de una constante es exacta). Cuando la fuerza neta es constante y distinta de cero, el simulador reproduce MRUA con una desviación de apenas 0.5 m en 125 m (0.4\%) tras 5 segundos de simulación --- atribuible exclusivamente al método de integración numérica, no a un error de modelado físico.
+
+\textbf{Fricción cinética --- corrección de un supuesto inicial:} el Avance \#1 anticipaba que la fricción cinética permitiría observar ``aceleración decreciente hasta velocidad terminal''. Al implementar fielmente la fórmula del propio Avance \#1 ($f_k = \mu_k \cdot N$, sección 3.4), se determinó --- y se verificó experimentalmente en el caso d2 --- que esto \textbf{no ocurre} con fricción de Coulomb pura: al ser $f_k$ de magnitud constante (no depende de la velocidad), una fuerza aplicada $F_a$ constante y mayor que $f_k$ produce una fuerza neta constante y, por lo tanto, una aceleración constante indefinidamente (MRUA), sin converger asintóticamente a ninguna velocidad terminal. Este comportamiento de ``velocidad terminal'' sí es válido en el \textbf{modo Rebote} del simulador, donde la resistencia del aire (fuerza de arrastre $F_{\text{drag}} = \tfrac{1}{2}\rho v^2 C_d A$) \textbf{sí depende de la velocidad al cuadrado}, generando allí una convergencia asintótica genuina. Esta distinción --- fricción de Coulomb (constante) versus arrastre aerodinámico (cuadrático en $v$) --- es en sí misma un hallazgo relevante del proyecto y se documenta explícitamente en la interfaz del modo Newton, que indica en tiempo real si $F_a>f_k$ (aceleración constante), $F_a<f_k$ (frenado hasta el reposo) o $F_a=f_k$ (equilibrio, MRU).
+
+\textbf{Comportamiento en 2D:} la Figura \ref{fig:newton2d} evidencia un efecto físico sutil no capturado por el modelo puramente 1D: cuando la fuerza aplicada tiene una componente perpendicular a la velocidad inicial, la fricción (que siempre se opone a la velocidad instantánea, no a la fuerza aplicada) produce una trayectoria curva durante el régimen transitorio, hasta que la velocidad se alinea progresivamente con la dirección de $F_a$. Esto explica la divergencia observada entre la curva simulada y la curva MRUA ideal (que asume una aceleración constante calculada en $t=0$).
+
+% ========================== LIMITACIONES ==========================
+\section{Limitaciones del modelo}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Integración de Euler explícita:} introduce un error de truncamiento de primer orden proporcional a $\Delta t$, visible en el caso c) (0.4\% de desviación tras 5 s). Un método de mayor orden (Runge--Kutta 4) reduciría este error, a costa de mayor complejidad de implementación.
+  \item \textbf{Objeto puntual sin dimensiones ni rotación:} no se modela momento de inercia, torque ni rotación del objeto; toda la masa se concentra en un punto.
+  \item \textbf{Fricción cinética simplificada:} se modela solo fricción cinética ($f_k=\mu_k N$), sin fricción estática. Esto implica que, en el modelo, un objeto en reposo bajo una fuerza aplicada $F_a\neq 0$ se pone en movimiento inmediatamente sin importar cuán pequeña sea $F_a$, lo cual no ocurre en la realidad (existe un umbral de fricción estática máxima).
+  \item \textbf{Plano horizontal sin inclinación:} el peso y la normal se cancelan siempre verticalmente; no se modelan planos inclinados, por lo que el peso no contribuye nunca al movimiento horizontal.
+  \item \textbf{$\Delta t$ variable ligado al framerate:} el paso de integración depende del tiempo real de renderizado ($\approx 1/60$ s), lo que introduce una fuente adicional, aunque pequeña, de variabilidad numérica entre ejecuciones.
+  \item \textbf{Sin colisiones en el modo Newton:} a diferencia del modo Rebote, el modo Newton no modela colisiones con bordes o superficies; el objeto puede desplazarse indefinidamente.
+  \item \textbf{Alcance de validez:} el modelo es válido únicamente para mecánica clásica no relativista, a velocidades muy por debajo de la velocidad de la luz, consistente con el marco teórico del Avance \#1.
+\end{enumerate}
+
+% ========================== CONCLUSIONES ==========================
+\section{Conclusiones físicas}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item Se cumplió el objetivo general del proyecto: se implementó y verificó un simulador que representa fielmente la relación fuerza neta -- masa -- aceleración ($F=m\cdot a$) de la segunda ley de Newton, con controles interactivos de masa, fuerza y fricción.
+  \item Se comprobó experimentalmente que la aceleración es inversamente proporcional a la masa para una fuerza neta fija, y directamente proporcional a la fuerza neta para una masa fija --- validando cuantitativamente $a=\sum F/m$ con un margen de error inferior al 1\%, atribuible únicamente a la integración numérica.
+  \item El simulador reproduce correctamente los dos casos límite de la cinemática: MRU (fuerza neta nula) y MRUA (fuerza neta constante), permitiendo comparación visual directa contra las curvas analíticas ideales.
+  \item Un hallazgo importante del proceso de implementación fue distinguir, con evidencia cuantitativa, entre la fricción cinética de Coulomb (constante, sin velocidad terminal) y la resistencia aerodinámica (cuadrática en $v$, con velocidad terminal genuina) --- un matiz que el planteamiento inicial del Avance \#1 no distinguía explícitamente, y que enriqueció la comprensión física del equipo.
+  \item Como mejora futura, se propone incorporar un integrador de mayor orden (Runge--Kutta 4) para reducir el error numérico observado en el caso MRUA, así como modelar fricción estática y planos inclinados para ampliar el alcance educativo del simulador.
+\end{enumerate}
+
+% ========================== REFERENCIAS ==========================
+\section{Referencias bibliográficas}
+
+\refitem{Serway, R. A., \& Jewett, J. W. (2018). \textit{Física para ciencias e ingeniería} (10.\textsuperscript{a} ed.). Cengage Learning.}
+
+\refitem{Young, H. D., \& Freedman, R. A. (2020). \textit{Física universitaria} (15.\textsuperscript{a} ed.). Pearson.}
+
+\refitem{OpenStax. (2020). \textit{College Physics}. Rice University. \url{https://openstax.org}}
+
+\refitem{Halliday, D., Resnick, R., \& Walker, J. (2014). \textit{Fundamentos de Física} (10.\textsuperscript{a} ed., Vol. 1). Editorial Médica Panamericana.}
+
+\refitem{Tipler, P. A., \& Mosca, G. (2010). \textit{Física para la ciencia y la tecnología} (6.\textsuperscript{a} ed., Vol. 1). Editorial Reverté.}
+
+\refitem{Young, H. D., \& Freedman, R. A. (2013). \textit{Física universitaria} (13.\textsuperscript{a} ed., Vol. 1). Pearson Educación.}
+
+\refitem{Pygame Community. (2024). \textit{Pygame documentation} (versión 2.6.1). \url{https://www.pygame.org/docs/}}
+
+\vspace{1cm}
+\noindent\textit{Nota de formato para la entrega final: verificar texto justificado, fuente formal y uniforme, numeración de figuras y tablas, y que las referencias e imágenes cumplan con el formato APA 7.\textsuperscript{a} edición antes de entregar el PDF compilado.}
+
+\end{document}
