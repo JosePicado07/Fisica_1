@@ -36,8 +36,10 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{longtable}
+\usepackage{xltabular}   % tabla ancha (columnas X) que se pagina sola
 \usepackage{caption}
 \usepackage{float}
+\usepackage{placeins}    % \FloatBarrier: evita que tablas/figuras se corran a otra sección
 
 % ---------- Código ----------
 \usepackage{listings}
@@ -215,13 +217,26 @@ Antes de considerar la implementación terminada, se ejecutó una batería de pr
 
 \subsection{Casos de prueba verificados}
 
-\begin{table}[H]
-\centering
+\begingroup
 \footnotesize
-\begin{tabularx}{\textwidth}{@{}c X X X X@{}}
+\singlespacing
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\begin{xltabular}{\textwidth}{@{}c X X X X@{}}
+\caption{Casos de prueba verificados sobre la clase \texttt{NewtonState}.}\label{tab:pruebas}\\
 \toprule
 \textbf{\#} & \textbf{Caso de prueba} & \textbf{Condiciones} & \textbf{Resultado obtenido} & \textbf{Resultado esperado (teoría)} \\
 \midrule
+\endfirsthead
+\multicolumn{5}{@{}l}{\normalfont\itshape Tabla \ref{tab:pruebas} (continuación)}\\
+\toprule
+\textbf{\#} & \textbf{Caso de prueba} & \textbf{Condiciones} & \textbf{Resultado obtenido} & \textbf{Resultado esperado (teoría)} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
 a  & $F = m\cdot a$ & $F_a=10$ N, $m=2$ kg, sin fricción & $a = 5.00\ \text{m/s}^2$ & $a = F_a/m = 5.00\ \text{m/s}^2$ \\
 a  & $F = m\cdot a$ (cambio de masa) & $F_a=10$ N, $m=5$ kg, sin fricción & $a = 2.00\ \text{m/s}^2$ & $a = 10/5 = 2.00\ \text{m/s}^2$ \\
 b  & MRU ($\sum F=0$) & $F_a=0$ tras impulso inicial, sin fricción & $v$ constante $= 10.000$ m/s & $v = v_0 =$ constante \\
@@ -230,37 +245,37 @@ d1 & Fricción --- frenado a reposo & $F_a\to 0$ tras impulso, $\mu_k=0.3$, $m=1
 d2 & Fricción cinética --- fuerza neta constante & $F_a=10$ N, $\mu_k=0.3$, $m=1$ kg & $a$ constante $=7.060\ \text{m/s}^2$; $v(10\text{ s})=70.66$ m/s & $a=(F_a-\mu_k m g)/m = 7.06\ \text{m/s}^2$ (cte.); $v=a\cdot t=70.60$ m/s \\
 e  & Reinicio & --- & Posición, velocidad y tiempo vuelven a 0; parámetros de los sliders se conservan & --- \\
 f  & Cambio de modo 1D$\leftrightarrow$2D & $F_a$ a $90^\circ$ en modo 2D & $y$ aumenta correctamente; al volver a 1D, $y$ y $v_y$ se fuerzan a 0 & --- \\
-\bottomrule
-\end{tabularx}
-\caption{Casos de prueba verificados sobre la clase \texttt{NewtonState}.}
-\end{table}
+\end{xltabular}
+\endgroup
 
 \textit{Nota metodológica:} la pequeña diferencia entre el valor simulado (124.50 m) y el valor analítico exacto (125.00 m) en el caso c) es el \textbf{error de truncamiento propio del método de Euler explícito} al usar $\Delta t$ del orden de 1/60 s --- se analiza en la sección \ref{sec:discusion}.
 
 \subsection{Capturas del simulador en funcionamiento}
 
-\begin{figure}[H]
+\begin{figure}[tbp]
   \centering
-  \includegraphics[width=0.85\textwidth]{figuras/figura1_modo_newton_1d.png}
+  \includegraphics[width=0.85\textwidth,height=0.42\textheight,keepaspectratio]{figuras/figura1_modo_newton_1d.png}
   \caption{Modo Fuerza Newton --- movimiento 1D con fricción activa ($F_a=15$ N, $m=2$ kg, $\mu_k=0.25$). Se observa el diagrama de cuerpo libre con los cuatro vectores de fuerza, las lecturas en vivo, y la curva simulada (celeste) superpuesta casi exactamente a la curva MRUA ideal (naranja), como corresponde a fuerza neta constante.}
   \label{fig:newton1d}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[tbp]
   \centering
-  \includegraphics[width=0.85\textwidth]{figuras/figura2_modo_newton_2d.png}
+  \includegraphics[width=0.85\textwidth,height=0.42\textheight,keepaspectratio]{figuras/figura2_modo_newton_2d.png}
   \caption{Modo Fuerza Newton --- movimiento 2D con $F_a$ aplicada a $45^\circ$ ($F_a=15$ N, $m=2$ kg, $\mu_k=0.25$). El vector de fuerza aplicada (rojo) y la trayectoria (línea diagonal) muestran cómo el objeto acelera en la dirección de la fuerza resultante. Nótese que la curva simulada (celeste) diverge levemente de la curva MRUA ideal (naranja): en 2D, la dirección de la fricción cambia a medida que la velocidad rota hacia la dirección de $F_a$, por lo que la componente $x$ de la aceleración no es perfectamente constante durante el régimen transitorio --- a diferencia del caso 1D puro de la Figura \ref{fig:newton1d}.}
   \label{fig:newton2d}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[tbp]
   \centering
-  \includegraphics[width=0.85\textwidth]{figuras/figura0_modo_rebote.png}
+  \includegraphics[width=0.85\textwidth,height=0.42\textheight,keepaspectratio]{figuras/figura0_modo_rebote.png}
   \caption{Modo Rebote (funcionalidad preexistente, conservada sin cambios) --- sandbox de caída libre con gravedad, arrastre aerodinámico y restitución en colisiones con superficies.}
   \label{fig:rebote}
 \end{figure}
 
 \textit{(El equipo puede agregar capturas adicionales de la exposición en vivo, mostrando distintos valores de masa, fricción y modo dimensional, antes de la entrega final en PDF.)}
+
+\FloatBarrier
 
 % =========================== DISCUSIÓN ===========================
 \section{Discusión y análisis físico}
