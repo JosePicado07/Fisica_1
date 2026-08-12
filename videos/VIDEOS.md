@@ -14,9 +14,9 @@ Cada integrante graba **únicamente su propio clip**, con el texto palabra por p
 
 | Clip | Integrante | Contenido | Duración objetivo | Enlace al video | Estado |
 |---|---|---|---|---|---|
-| 1 | José Andrés Picado Corrales | Apertura (6 diapositivas de `Physics-Playground.pptx`) + demo fricción y modo 2D | ~4–4.5 min | *(pendiente)* | ⏳ Pendiente |
+| 1 | José Andrés Picado Corrales | Apertura (6 diapositivas de `Physics-Playground.pptx`) + demo fricción y modo 2D | ~4.5–5 min | *(pendiente)* | ⏳ Pendiente |
 | 2 | Matías Lutz | Marco teórico en detalle | ~3 min | *(pendiente)* | ⏳ Pendiente |
-| 3 | Antonio Mora Blotta | Arquitectura técnica + demo F=m·a | ~2.5 min | *(pendiente)* | ⏳ Pendiente |
+| 3 | Antonio Mora Blotta | Arquitectura técnica + demo F=m·a + demo modo Rebote | ~3–3.5 min | *(pendiente)* | ⏳ Pendiente |
 | 4 | Juan Pablo Solano Esquivel | Análisis, limitaciones y conclusiones | ~4.5–5 min | *(pendiente)* | ⏳ Pendiente |
 
 *(Actualizar la columna "Estado" a ✅ Listo una vez subido el enlace.)*

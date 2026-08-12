@@ -21,7 +21,7 @@
 
 ---
 
-## Clip 1 — José Andrés Picado Corrales (≈ 4–4.5 min)
+## Clip 1 — José Andrés Picado Corrales (≈ 4.5–5 min)
 ### Apertura del proyecto (diapositiva por diapositiva) + demo en vivo: fricción y modo 2D
 
 Este clip abre el video. Tiene dos partes: el recorrido completo de `Physics-Playground.pptx` (6 diapositivas, una por una) y, sin cortar, tu demo en vivo del simulador.
@@ -56,19 +56,19 @@ Este clip abre el video. Tiene dos partes: el recorrido completo de `Physics-Pla
 
 ### Parte B — Demo en vivo: fricción cinética y modo 2D (≈ 2 min)
 
-**Qué mostrar en pantalla:** salís del modo presentación y, sin cortar la grabación, cambiás a la ventana del simulador ya abierto (grabación de pantalla completa con `Win + Alt + R`). Preparar antes: modo 1D, fricción activada, μk = 0.25, Fa = 15 N.
+**Qué mostrar en pantalla:** salís del modo presentación y, sin cortar la grabación, cambiás a la ventana del simulador ya abierto (grabación de pantalla completa con `Win + Alt + R`). Preparar antes, dejando los sliders exactamente así: modo 1D, masa = 2.0 kg, fuerza aplicada Fa = 15 N, fricción activada con μk = 0.25.
 
 > Mi parte en el desarrollo fue apoyar la implementación, sobre todo las pruebas, la fricción y el diagrama de cuerpo libre. Les muestro eso ahora.
 >
-> [**Mostrar el simulador en pantalla completa, pestaña Fuerza Newton, fricción ya activada en 0.25.**] Aquí tengo la fricción activada, con un coeficiente de 0.25. Fíjense en este mensaje del panel derecho: nos dice si la fuerza aplicada es mayor, menor o igual a la fricción. Cuando Fa es mayor que la fricción, el objeto acelera de forma constante — no se frena solo, porque la fricción cinética no depende de la velocidad, solo depende de la normal y de mu-k.
+> [**Mostrar el simulador en pantalla completa, pestaña Fuerza Newton, con masa=2 kg, Fa=15 N, fricción ya activada en μk=0.25.**] Tengo la masa en 2 kilogramos, la fuerza aplicada en 15 newtons, y la fricción activada con un coeficiente mu-k de 0.25. Con esos números, la fricción se calcula como mu-k por la normal: 0.25 por el peso, que es masa por gravedad, 2 por 9.8 — eso da casi 5 newtons de fricción, unos 4.9 newtons exactos. Como los 15 newtons de fuerza aplicada son mayores que esos 4.9 newtons de fricción, el simulador muestra este mensaje en el panel derecho: "Fa mayor que fk: acelera constante". Eso quiere decir que el objeto va a seguir acelerando todo el tiempo al mismo ritmo, sin frenarse solo, porque la fricción cinética es un valor fijo — no depende de qué tan rápido se esté moviendo el objeto, solo depende de la normal y de mu-k.
 >
-> Ahora, con el objeto en movimiento, le voy a quitar la fuerza aplicada. [**Bajar Fa a 0 mientras el objeto se mueve.**] Miren cómo desacelera de forma constante hasta detenerse completamente, sin rebotar ni oscilar — eso lo probamos a fondo en el código para asegurarnos de que no hubiera errores numéricos ahí.
+> Ahora, con el objeto en movimiento, le voy a bajar la fuerza aplicada a 0 newtons, dejando la fricción activada. [**Bajar el slider de Fa a 0 mientras el objeto se mueve.**] Miren cómo, sin ninguna fuerza empujándolo, la fricción de 4.9 newtons lo desacelera de forma constante hasta detenerse completamente — y se queda quieto, sin rebotar ni oscilar de un lado a otro. Eso lo probamos a fondo en el código para asegurarnos de que no hubiera errores numéricos ahí.
 >
-> Por último, les muestro el modo 2D. [**Clic en el botón 2D, poner el ángulo de Fa en 45 grados, iniciar.**] Ahora la fuerza tiene un ángulo, y el objeto traza una trayectoria diagonal. Noten cómo el diagrama de cuerpo libre rota junto con la dirección de la fuerza aplicada, en tiempo real.
+> Por último, les muestro el modo 2D. [**Clic en el botón 2D, subir Fa de nuevo a unos 15 newtons, poner el ángulo de Fa en 45 grados, iniciar.**] Ahora la fuerza tiene un ángulo de 45 grados, y el objeto traza una trayectoria diagonal. Noten cómo el diagrama de cuerpo libre rota junto con la dirección de la fuerza aplicada, en tiempo real.
 >
 > Con esta vista general del simulador funcionando, le paso la palabra a Matías, que les va a explicar con más detalle la teoría detrás de todo esto.
 
-**Duración estimada:** ~1 min 40 seg de narración de las 6 diapositivas + ~1 min 45 seg de narración de la demo, más el tiempo real de los clics y las transiciones entre diapositivas (total del clip: ~4–4.5 min).
+**Duración estimada:** ~1 min 40 seg de narración de las 6 diapositivas + ~2 min de narración de la demo (con los cálculos de fricción incluidos), más el tiempo real de los clics y las transiciones entre diapositivas (total del clip: ~4.5–5 min).
 
 ---
 
@@ -93,26 +93,28 @@ Este clip abre el video. Tiene dos partes: el recorrido completo de `Physics-Pla
 
 ---
 
-## Clip 3 — Antonio Mora Blotta (≈ 2.5 min)
-### Arquitectura técnica + demo en vivo de F = m·a
+## Clip 3 — Antonio Mora Blotta (≈ 3–3.5 min)
+### Arquitectura técnica + demo en vivo de F = m·a + demo rápida del modo Rebote
 
 **Qué mostrar en pantalla:** grabación de pantalla completa (`Win + Alt + R`) con el simulador ya abierto en la pestaña "FUERZA NEWTON", modo 1D, sin fricción activada.
 
-**Preparar antes de grabar:** masa en 2 kg, fuerza aplicada (Fa) en 10 N, fricción desactivada.
+**Preparar antes de grabar:** en Fuerza Newton, masa en 2 kg, fuerza aplicada (Fa) en 10 N, fricción desactivada. Tener también identificados, en la pestaña Rebote, el objeto "Pelota Tenis" (menú izquierdo) y la superficie "Trampolín" (ya está puesta por defecto en el área de simulación).
 
-> Hola, soy Antonio Mora Blotta, y fui el desarrollador principal del simulador. Les voy a mostrar la arquitectura técnica y después una demostración en vivo de la segunda ley de Newton.
+> Hola, soy Antonio Mora Blotta, y fui el desarrollador principal del simulador. Les voy a mostrar la arquitectura técnica y dos demostraciones en vivo: la segunda ley de Newton, y una prueba rápida del otro modo del simulador.
 >
 > El simulador está hecho en Python, usando la librería pygame. Tiene dos modos, que se seleccionan con las pestañas de arriba: un modo de rebote, que ya existía de un proyecto anterior, y el modo Fuerza Newton, que es el que construimos específicamente para responder a los objetivos de este proyecto — el que ya les mostró José Andrés.
 >
 > Internamente, el modo Newton separa completamente la física de la interfaz: toda la lógica de fuerzas, aceleración, velocidad y posición vive en una clase que no depende para nada de la ventana gráfica. Eso nos permitió probar la física de forma aislada y automatizada antes de siquiera preocuparnos por cómo se veía en pantalla. Para el cálculo del movimiento usamos integración de Euler, con el mismo paso de tiempo del framerate, aproximadamente un sesentavo de segundo, tal como lo planteamos en el Avance uno.
 >
-> Ahora sí, vamos a la demostración. [**Mostrar el simulador en pantalla completa, modo 1D, sin fricción.**] Como ven, tengo la fuerza aplicada en 10 newtons y la masa en 2 kilogramos. Le doy iniciar. [**Clic en Iniciar.**] Fíjense en el panel de la derecha: la aceleración marca 5 metros por segundo al cuadrado. Eso es exactamente lo que predice la fórmula: 10 newtons entre 2 kilogramos, da 5.
+> Ahora sí, vamos a la primera demostración. [**Mostrar el simulador en pantalla completa, pestaña Fuerza Newton, modo 1D, sin fricción, masa=2 kg, Fa=10 N.**] Como ven, tengo la fuerza aplicada en 10 newtons y la masa en 2 kilogramos. Le doy iniciar. [**Clic en Iniciar.**] Fíjense en el panel de la derecha: la aceleración marca 5 metros por segundo al cuadrado. Eso es exactamente lo que predice la fórmula: 10 newtons entre 2 kilogramos, da 5.
 >
 > Ahora voy a pausar [**Clic en Pausar**], y sin tocar la fuerza, voy a subir la masa a 5 kilogramos [**Mover el slider de masa a 5**]. Reinicio [**Clic en Reset**] e inicio de nuevo [**Clic en Iniciar**]. Miren cómo cambió la aceleración: ahora marca 2 metros por segundo al cuadrado. Misma fuerza, más masa, menos aceleración — la relación inversa de a igual fuerza neta entre masa, en tiempo real.
 >
-> Con la simulación funcionando y probada, le paso la palabra a Juan Pablo, que les va a explicar qué dicen estos resultados desde el punto de vista físico.
+> Antes de pasar la palabra, les muestro muy rápido el otro modo, el de Rebote. [**Clic en la pestaña REBOTE. Arrastrar el objeto "Pelota Tenis" del menú izquierdo y soltarlo sobre el "Trampolín" en el centro de la pantalla.**] Aquí no hay ninguna fuerza aplicada por el usuario: el objeto cae solo por gravedad, que está en 9.81 metros por segundo al cuadrado, con resistencia del aire activada, a una densidad de 1.225 kilogramos por metro cúbico — los valores estándar al nivel del mar. Esta pelota de tenis tiene un coeficiente de restitución de 0.80, y el trampolín, de 0.92, así que va a rebotar bastante alto. [**Dejar que rebote un par de veces.**] En el panel derecho, en tiempo real, ven la velocidad, la energía cinética y potencial, cuántas veces ha rebotado, y hasta la velocidad terminal teórica que alcanzaría si cayera desde muy alto, calculada con la fórmula de arrastre aerodinámico.
+>
+> Con las dos simulaciones funcionando y probadas, le paso la palabra a Juan Pablo, que les va a explicar qué dicen estos resultados desde el punto de vista físico.
 
-**Duración estimada leyendo a ritmo normal, sin contar las pausas de la demo:** ~2 min 15 seg + tiempo de demo.
+**Duración estimada leyendo a ritmo normal, sin contar las pausas de las demos:** ~3 min de narración + tiempo de las dos demos.
 
 ---
 
@@ -160,13 +162,13 @@ Aunque los clips se graban por separado, todos deben poder responder preguntas e
 
 | Clip | Integrante | Contenido | Tiempo aprox. |
 |---|---|---|---|
-| 1 | José Andrés Picado Corrales | Apertura (6 diapositivas, una por una) + demo fricción y modo 2D | ~4–4.5 min |
+| 1 | José Andrés Picado Corrales | Apertura (6 diapositivas, una por una) + demo fricción y modo 2D | ~4.5–5 min |
 | 2 | Matías Lutz | Marco teórico en detalle | ~3 min |
-| 3 | Antonio Mora Blotta | Arquitectura + demo F=m·a | ~2.5 min |
+| 3 | Antonio Mora Blotta | Arquitectura + demo F=m·a + demo modo Rebote | ~3–3.5 min |
 | 4 | Juan Pablo Solano Esquivel | Análisis, limitaciones y conclusiones | ~4.5–5 min |
-| **Total (video editado)** | | | **~14–15 min** |
+| **Total (video editado)** | | | **~15–16.5 min** |
 
-*(Los tiempos de demo en vivo dentro de los clips 1 y 3 se suman aparte del tiempo de habla — al editar, dejar que la acción en pantalla respire un par de segundos antes de seguir hablando. Si el total se pasa de 15 min, lo primero que se puede acortar es el ritmo de las diapositivas del Clip 1 — leerlas un poco más rápido —, ya que Matías cubre la teoría con más detalle después.)*
+*(El total queda un poco por encima del rango de 10-15 min de la rúbrica. Si hay que recortar: primero acortar el ritmo de las diapositivas del Clip 1 — leerlas más rápido —, ya que Matías cubre la teoría con más detalle después; y si aún falta, la demo del modo Rebote en el Clip 3 se puede acortar a un solo rebote en vez de "un par". Los tiempos de demo en vivo dentro de los clips 1 y 3 se suman aparte del tiempo de habla — al editar, dejar que la acción en pantalla respire un par de segundos antes de seguir hablando.)*
 
 ---
 
